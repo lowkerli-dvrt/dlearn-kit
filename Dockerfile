@@ -10,6 +10,7 @@ ENV REFRESHED_AT 2016-04-25
 RUN apt-get update && apt-get install -y \
     curl \
     libfreetype6-dev \
+    libhdf5-dev \
     libjpeg9-dev \
     libpng12-dev \
     libzmq3-dev \
@@ -42,6 +43,7 @@ RUN curl https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSOR
 
 # Install Keras
 RUN pip3 --no-cache-dir install \
+    h5py \
     keras \
     Pillow
 
