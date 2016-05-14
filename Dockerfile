@@ -5,13 +5,13 @@ FROM ubuntu:16.04
 
 MAINTAINER Low Ker Li <lowkerli@diverta.co.jp>
 
-ENV REFRESHED_AT 2016-04-25
+ENV REFRESHED_AT 2016-05-14
 
 RUN apt-get update && apt-get install -y \
     curl \
     libfreetype6-dev \
     libhdf5-dev \
-    libjpeg9-dev \
+    libjpeg8-dev \
     libpng12-dev \
     libzmq3-dev \
     pkg-config \
