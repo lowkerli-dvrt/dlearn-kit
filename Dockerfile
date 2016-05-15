@@ -1,6 +1,3 @@
-# Based on official TensorFlow Dockerfile
-# (https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile)
-
 FROM ubuntu:16.04
 
 MAINTAINER Low Ker Li <lowkerli@diverta.co.jp>
