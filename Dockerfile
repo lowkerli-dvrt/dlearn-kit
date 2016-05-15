@@ -56,10 +56,19 @@ EXPOSE 8888
 ENV NOTEBOOKS_DIR /root/notebooks
 
 # Prepare directories for volumes
-RUN mkdir -p {${NOTEBOOKS_DIR},/root/{bin,python,data}}
+RUN mkdir -p \
+    ${NOTEBOOKS_DIR} \
+    /root/bin \
+    /root/python \
+    /root/data
 
 # Create mount points
-VOLUME ["${NOTEBOOKS_DIR}", "/root/bin", "/root/python", "/root/data"]
+VOLUME [ \
+    "${NOTEBOOKS_DIR}", \
+    "/root/bin", \
+    "/root/python", \
+    "/root/data" \
+    ]
 
 # Add modules path to PYTHONPATH
 ENV PYTHONPATH $PYTHONPATH:/root/python/modules
