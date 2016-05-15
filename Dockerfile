@@ -12,6 +12,7 @@ ENV LANG C.UTF-8
 RUN apt-get update && apt-get install -y \
     bzip2 \
     curl \
+    libgtk2.0-dev \ # Required by OpenCV
  && rm -rf /var/lib/apt/lists/*
 
 # Install Miniconda
