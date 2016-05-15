@@ -5,47 +5,38 @@ FROM ubuntu:16.04
 
 MAINTAINER Low Ker Li <lowkerli@diverta.co.jp>
 
-ENV REFRESHED_AT 2016-05-14
+ENV REFRESHED_AT 2016-05-15
+
+ENV LANG C.UTF-8
 
 RUN apt-get update && apt-get install -y \
+    bzip2 \
     curl \
-    libfreetype6-dev \
-    libhdf5-dev \
-    libjpeg8-dev \
-    libpng12-dev \
-    libzmq3-dev \
-    pkg-config \
-    python3 \
-    python3-dev \
-    python3-numpy \
-    python3-scipy \
-    zlib1g-dev \
  && rm -rf /var/lib/apt/lists/*
 
-# Install pip
-RUN curl -O https://bootstrap.pypa.io/get-pip.py \
- && python3 get-pip.py \
- && rm get-pip.py
+# Install Miniconda
+RUN echo "export PATH=/opt/conda/bin:$PATH" > /etc/profile.d/conda.sh \
+ && curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+ && /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
+ && rm Miniconda3-latest-Linux-x86_64.sh
 
-RUN pip3 --no-cache-dir install \
+ENV PATH /opt/conda/bin:$PATH
+
+RUN conda install -y -c menpo -c jjhelmus \
+    dlib \
+    h5py \
     jupyter \
     matplotlib \
- && python3 -m ipykernel install
-        
-# Install TensorFlow CPU version.
-# The following is a hack to install TensorFlow for Python 3.5
-ENV TENSORFLOW_VERSION 0.8.0
-RUN curl https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-${TENSORFLOW_VERSION}-cp34-cp34m-linux_x86_64.whl \
-    -o tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl \
- && pip3 --no-cache-dir install \
-    tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl \
- && rm tensorflow-${TENSORFLOW_VERSION}-cp35-cp35m-linux_x86_64.whl
+    opencv3 \
+    pillow \
+    tensorflow \
+ && conda clean -a
 
-# Install Keras
-RUN pip3 --no-cache-dir install \
-    h5py \
-    keras \
-    Pillow
+# Update pip
+RUN pip --no-cache-dir install --upgrade pip
+
+RUN pip --no-cache-dir install \
+    keras
 
 # Copy Keras configurations
 # (Set backend to Tensorflow)
