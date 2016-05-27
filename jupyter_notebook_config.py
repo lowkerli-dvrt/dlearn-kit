@@ -16,4 +16,5 @@
 c.NotebookApp.ip = '*'
 c.NotebookApp.port = 8888
 c.NotebookApp.open_browser = False
+c.NotebookApp.password = u'sha1:ce72c3645712:41426e91ea04ba8fdf57ee31787d1ecb24e90b09'
 c.MultiKernelManager.default_kernel_name = 'python3'
