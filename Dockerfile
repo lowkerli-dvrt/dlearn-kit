@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 MAINTAINER Low Ker Li <lowkerli@diverta.co.jp>
 
-ENV REFRESHED_AT 2016-05-15
+ENV REFRESHED_AT 2016-05-27
 
 ENV LANG C.UTF-8
 
@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     bzip2 \
     curl \
     libgtk2.0-dev \
+    vim \
  && rm -rf /var/lib/apt/lists/*
 
 # Install Miniconda
